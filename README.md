@@ -6,10 +6,10 @@ However, users still report that my suggestion fails. Finally, I decide to set u
 
 ## The steps to recreate my example
 
-1. Pull the source code of this repo to a folder, e.g., ~/DT-sticky-session.
+1. Pull the source code of this repo to a folder, e.g., ~/DT-load-balancer.
 1. CD into that folder.
 1. Run `docker swarm init` to init the docker swarm.
-1. Run `docker stack deploy -c traefik.yml traefik` to start traefik (a load rebalancer).
+1. Run `docker stack deploy -c traefik.yml traefik` to start traefik (a load balancer).
 1. Run `docker stack deploy -c shiny.yml shiny` to start a shiny app.
 
 ## Thanks
