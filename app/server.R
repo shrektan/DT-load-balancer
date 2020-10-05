@@ -1,7 +1,9 @@
-library(shiny)
 function(input, output, session) {
   output$tbl <- DT::renderDT({
-    # Sys.sleep(10)
     iris
+  }, server = TRUE)
+  output$ip <- shiny::renderPrint({
+    x <- system2("cat", c("/etc/hosts"), stdout = TRUE)
+    cat(x, sep = '\n')
   })
 }

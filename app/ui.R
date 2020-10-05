@@ -1,5 +1,4 @@
-library(shiny)
-library(DT)
-fluidPage(
-  DT::DTOutput('tbl')
+shiny::fluidPage(
+  DT::DTOutput('tbl'),
+  shiny::verbatimTextOutput('ip')
 )
