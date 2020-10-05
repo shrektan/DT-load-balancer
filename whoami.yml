@@ -1,4 +1,5 @@
 version: "3.8"
+# this file is only for debugging purpose and no longer required
 services:
   whoami:
     image: traefik/whoami
