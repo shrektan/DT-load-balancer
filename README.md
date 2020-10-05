@@ -41,8 +41,8 @@ docker stack deploy -c shiny-no-sticky.yml shiny-no-sticky
 1. Again, you'd better use Chrome
 1. http://traefik.sys.localhost/ : the dashboard of traefik ![dashboard](img/dashboard.png)
 
-1. http://shiny-sticky.docker.localhost/ : the shiny app with sticky session enabled - should work **without** Ajax errors ![shiny-sticky](img/shiny-sticky.png)
-1. http://shiny-no-sticky.docker.localhost/ : the shiny app without sticky session enabled - should work **with** Ajax errors ![shiny-no-sticky](img/shiny-no-sticky.png)
+1. http://shiny-sticky.docker.localhost/ : the shiny app with sticky session enabled - **should work with no errors** ![shiny-sticky](img/shiny-sticky.png)
+1. http://shiny-no-sticky.docker.localhost/ : the shiny app without sticky session enabled - **should not work as Ajax errors will be thrown** ![shiny-no-sticky](img/shiny-no-sticky.png)
 
 For the last two shiny apps, please pay attention to the last line of the apps, where the internal IP address is displayed. **You should see that when sticky session is disabled, the IP address gets changed each time you refresh the webpage.**
 
