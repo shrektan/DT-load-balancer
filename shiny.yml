@@ -1,0 +1,26 @@
+version: "3.8"
+services:
+  shiny:
+    image: "shrektan/rdocker4working:latest"
+    deploy:
+      replicas: 2
+      labels:
+          - traefik.enable=true # enable traefik
+          - traefik.docker.network=traefik-public # put it in the same network as traefik
+          - traefik.http.routers.shiny.rule=Host(`shiny.docker.localhost`) # listen to port 80 for request to APP_DOMAIN (use together with the line below)
+          - traefik.http.routers.shiny.entrypoints=http
+          - traefik.http.services.shiny.loadbalancer.server.port=3838 # ask Traefik to search for port 3838 of the euler app service container
+          - traefik.http.services.shiny.loadbalancer.sticky=true
+          # - traefik.http.services.shiny.loadbalancer.sticky.cookie.name=traefik_shiny_cookie
+          # - traefik.http.services.shiny.loadbalancer.sticky.cookie.httpOnly=true
+          # - traefik.http.services.shiny.loadbalancer.sticky.cookie.secure=false
+    volumes:
+      - ./app:/app
+    command: ['Rscript', '-e', "shiny::runApp('/app', host = '0.0.0.0', port = 3838)"]
+    networks:
+      - traefik-public
+networks:
+  # Use the previously created public network "traefik-public", shared with other
+  # services that need to be publicly available via this Traefik
+  traefik-public:
+    external: true

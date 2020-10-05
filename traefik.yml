@@ -1,0 +1,30 @@
+version: "3.8"
+services:
+  traefik:
+    image: traefik:v2.3.0
+    ports:
+      - 80:80
+      - 8080:8080
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    deploy:
+      labels:
+        - traefik.enable=true
+        - traefik.http.services.traefik-public.loadbalancer.server.port=8080
+        - traefik.docker.network=traefik-public
+        - traefik.http.routers.traefik-public-http.rule=Host(`traefik.sys.localhost`)
+    command:
+      - --api.insecure=true
+      - --providers.docker
+      - --entrypoints.http.address=:80
+      - --providers.docker.swarmmode
+      - --accesslog
+      - --log
+      - --api
+    networks:
+      - traefik-public
+networks:
+  # Use the previously created public network "traefik-public", shared with other
+  # services that need to be publicly available via this Traefik
+  traefik-public:
+    external: true

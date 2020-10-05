@@ -1,0 +1,21 @@
+version: "3.8"
+services:
+  whoami:
+    image: traefik/whoami
+    deploy:
+      replicas: 2
+      labels:
+          - traefik.enable=true # enable traefik
+          - traefik.docker.network=traefik-public # put it in the same network as traefik
+          - traefik.http.routers.whoami.rule=Host(`whoami.docker.localhost`)
+          - traefik.http.routers.whoami.entrypoints=http
+          - traefik.http.services.whoami.loadbalancer.server.port=80
+          - traefik.http.services.whoami.loadbalancer.sticky=true
+          - traefik.http.services.whoami.loadbalancer.sticky.cookie.name=traefik_whoami_cookie
+          - traefik.http.services.whoami.loadbalancer.sticky.cookie.httpOnly=true
+          - traefik.http.services.whoami.loadbalancer.sticky.cookie.secure=true
+    networks:
+      - traefik-public
+networks:
+  traefik-public:
+    external: true
