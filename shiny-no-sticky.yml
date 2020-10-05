@@ -1,0 +1,22 @@
+version: "3.8"
+services:
+  shiny-no-sticky:
+    image: "shrektan/rdocker4working:latest"
+    deploy:
+      replicas: 2
+      labels:
+          - traefik.enable=true
+          - traefik.docker.network=traefik-public
+          - traefik.http.routers.shiny-no-sticky.rule=Host(`shiny-no-sticky.docker.localhost`)
+          - traefik.http.routers.shiny-no-sticky.entrypoints=http
+          - traefik.http.services.shiny-no-sticky.loadbalancer.server.port=3838
+          # note that the only difference from `shiny-sticky.yml` is the sticky session
+          # set-ups have been removed.
+    volumes:
+      - ./app:/app
+    command: ['Rscript', '-e', "shiny::runApp('/app', host = '0.0.0.0', port = 3838)"]
+    networks:
+      - traefik-public
+networks:
+  traefik-public:
+    external: true

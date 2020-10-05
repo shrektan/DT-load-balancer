@@ -1,0 +1,26 @@
+version: "3.8"
+services:
+  shiny-sticky:
+    image: "shrektan/rdocker4working:latest"
+    deploy:
+      replicas: 2
+      labels:
+          - traefik.enable=true
+          - traefik.docker.network=traefik-public
+          - traefik.http.routers.shiny-sticky.rule=Host(`shiny-sticky.docker.localhost`)
+          - traefik.http.routers.shiny-sticky.entrypoints=http
+          - traefik.http.services.shiny-sticky.loadbalancer.server.port=3838
+          - traefik.http.services.shiny-sticky.loadbalancer.sticky=true
+          - traefik.http.services.shiny-sticky.loadbalancer.sticky.cookie.name=traefik_shiny_cookie
+          - traefik.http.services.shiny-sticky.loadbalancer.sticky.cookie.httpOnly=true
+          # the below line is important. I'm not sure the reason. But my guess is:
+          # since we are using http (not https), we can't secure the cookie
+          - traefik.http.services.shiny-sticky.loadbalancer.sticky.cookie.secure=false
+    volumes:
+      - ./app:/app
+    command: ['Rscript', '-e', "shiny::runApp('/app', host = '0.0.0.0', port = 3838)"]
+    networks:
+      - traefik-public
+networks:
+  traefik-public:
+    external: true
