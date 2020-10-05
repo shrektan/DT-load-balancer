@@ -5,8 +5,8 @@ services:
     deploy:
       replicas: 2
       labels:
-          - traefik.enable=true # enable traefik
-          - traefik.docker.network=traefik-public # put it in the same network as traefik
+          - traefik.enable=true
+          - traefik.docker.network=traefik-public
           - traefik.http.routers.whoami.rule=Host(`whoami.docker.localhost`)
           - traefik.http.routers.whoami.entrypoints=http
           - traefik.http.services.whoami.loadbalancer.server.port=80
