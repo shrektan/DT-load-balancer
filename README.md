@@ -1,6 +1,6 @@
 # An example to illustrate deploying DT under a load balancer
 
-There're a lot of questions about the server-side processing mode of DT can't work well with a load balancer. I believe the reason is the DT table in the browser needs to POST an Ajax request to the original server in order to update the data. So my suggestion is always to enable the stick session of the load balancer.
+There're a lot of questions about the server-side processing mode of DT can't work well with a load balancer. I believe the reason is the DT table in the browser needs to POST an Ajax request to the original server in order to update the data. So my suggestion is always to enable the sticky session of the load balancer.
 
 However, users still report that my suggestion fails. Finally, I decide to set up an example about this so that I can be confident to say that the issue is not caused by DT.
 
@@ -32,7 +32,7 @@ docker stack deploy -c shiny-no-sticky.yml shiny-no-sticky
 
 1. `docker swarm init`: init the docker swarm.
 1. `docker network create --driver=overlay traefik-public`: create a network so that services can find each other.
-1.`docker stack deploy -c xxx.yml xxx` to start xxx as a service.
+1. `docker stack deploy -c xxx.yml xxx` to start xxx as a service.
 
 ## Use Chrome to check the result
 
