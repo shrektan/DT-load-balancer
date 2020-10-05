@@ -51,7 +51,6 @@ Remove the services and networks:
 
 ```shell
 docker swarm leave --force
-docker network rm traefik-public
 ```
 
 ## Thanks
