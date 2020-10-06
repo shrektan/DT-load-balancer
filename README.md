@@ -1,4 +1,4 @@
-# An example to illustrate deploying DT under a load balancer
+# An example to illustrate deploying DT behind a load balancer
 
 There're a lot of questions about the server-side processing mode of DT can't work well with a load balancer. I believe the reason is the DT table in the browser needs to POST an Ajax request to the original server in order to update the data. So my suggestion is always to enable the sticky session of the load balancer.
 
