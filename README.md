@@ -16,7 +16,7 @@ OSX with docker desktop installed. Other systems should be fine but you may or m
 1. CD into that folder.
 1. Prepare the docker images
     - `docker pull traefik:v2.3.0` (for reverse proxy and load balancer)
-    - `docker pull shrektan/rdocker4working:latest` (for serving shiny apps)
+    - `docker pull rocker/shiny:latest` (for serving shiny apps)
 
 ### Paste the below code into the terminal and execute them
 
@@ -48,7 +48,7 @@ For the last two shiny apps, please pay attention to the last line of the apps, 
 
 ## Clean up
 
-Remove the services and networks: 
+Remove the services and networks:
 
 ```shell
 docker swarm leave --force
