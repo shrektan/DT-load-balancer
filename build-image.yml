@@ -1,0 +1,7 @@
+version: "3.8"
+services:
+  r-shiny-image:
+    build:
+      context: .
+      dockerfile: ./r-shiny/Dockerfile
+    image: r-shiny

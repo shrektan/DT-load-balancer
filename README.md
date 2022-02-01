@@ -16,7 +16,8 @@ OSX with docker desktop installed. Other systems should be fine but you may or m
 1. CD into that folder.
 1. Prepare the docker images
     - `docker pull traefik:v2.3.0` (for reverse proxy and load balancer)
-    - `docker pull rocker/shiny:latest` (for serving shiny apps)
+    - `docker pull r-base:latest` (for serving shiny apps)
+    - `docker-compose -f build-image.yml build` (so that we can have an image named "r-shiny" with shiny and DT packages installed. Note, this is also necessary on M1 Mac, where the CPU is arm64. Only so you can run the example successfully.)
 
 ### Paste the below code into the terminal and execute them
 

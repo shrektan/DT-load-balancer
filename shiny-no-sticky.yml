@@ -1,7 +1,7 @@
 version: "3.8"
 services:
   shiny-no-sticky:
-    image: "rocker/shiny:latest"
+    image: r-shiny:latest
     deploy:
       replicas: 2
       labels:
